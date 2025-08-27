@@ -214,13 +214,15 @@ const EventModal: React.FC<EventModalProps> = ({
         }
 
         .modal-content {
-          background: white;
+          background: var(--bg-primary);
           border-radius: 12px;
           width: 100%;
           max-width: 500px;
           max-height: 90vh;
           overflow-y: auto;
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 25px 50px -12px var(--shadow-medium);
+          border: 1px solid var(--border-primary);
+          transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
 
         .modal-header {
@@ -228,10 +230,11 @@ const EventModal: React.FC<EventModalProps> = ({
           align-items: center;
           justify-content: space-between;
           padding: 1.5rem;
-          border-bottom: 1px solid var(--gray-200);
+          border-bottom: 1px solid var(--border-primary);
           background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
           color: white;
           border-radius: 12px 12px 0 0;
+          transition: border-color 0.3s;
         }
 
         .modal-title {
@@ -279,8 +282,9 @@ const EventModal: React.FC<EventModalProps> = ({
           display: block;
           font-size: 0.875rem;
           font-weight: 500;
-          color: var(--gray-700);
+          color: var(--text-primary);
           margin-bottom: 0.5rem;
+          transition: color 0.3s;
         }
 
         .textarea {
@@ -294,7 +298,8 @@ const EventModal: React.FC<EventModalProps> = ({
           align-items: center;
           margin-top: 2rem;
           padding-top: 1.5rem;
-          border-top: 1px solid var(--gray-200);
+          border-top: 1px solid var(--border-primary);
+          transition: border-color 0.3s;
         }
 
         .action-buttons {

@@ -105,11 +105,12 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
 
       <style jsx>{`
         .calendar-container {
-          background: white;
+          background: var(--bg-primary);
           border-radius: 12px;
           overflow: hidden;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-          border: 1px solid var(--gray-200);
+          box-shadow: 0 4px 6px -1px var(--shadow-medium);
+          border: 1px solid var(--border-primary);
+          transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
 
         .calendar-header {
@@ -147,18 +148,21 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
 
         .calendar-grid {
           display: flex;
-          background: white;
+          background: var(--bg-primary);
+          transition: background-color 0.3s;
         }
 
         .time-column {
           width: 80px;
-          background: var(--gray-50);
-          border-right: 1px solid var(--gray-200);
+          background: var(--bg-secondary);
+          border-right: 1px solid var(--border-primary);
+          transition: background-color 0.3s, border-color 0.3s;
         }
 
         .day-column {
           flex: 1;
-          border-right: 1px solid var(--gray-200);
+          border-right: 1px solid var(--border-primary);
+          transition: border-color 0.3s;
         }
 
         .day-column:last-child {
@@ -168,20 +172,22 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
         .day-header {
           height: 80px;
           padding: 1rem;
-          background: var(--gray-50);
-          border-bottom: 2px solid var(--gray-200);
+          background: var(--bg-secondary);
+          border-bottom: 2px solid var(--border-primary);
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
+          transition: background-color 0.3s, border-color 0.3s;
         }
 
         .day-name {
           font-size: 0.75rem;
           font-weight: 500;
-          color: var(--gray-600);
+          color: var(--text-secondary);
           text-transform: uppercase;
           letter-spacing: 0.05em;
+          transition: color 0.3s;
         }
 
         .day-number {
@@ -206,22 +212,23 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
           padding: 0.5rem;
           font-size: 0.75rem;
           font-weight: 500;
-          color: var(--gray-500);
+          color: var(--text-secondary);
           display: flex;
           align-items: flex-start;
-          border-bottom: 1px solid var(--gray-100);
+          border-bottom: 1px solid var(--border-primary);
+          transition: color 0.3s, border-color 0.3s;
         }
 
         .time-slot-cell {
           height: 60px;
-          border-bottom: 1px solid var(--gray-100);
+          border-bottom: 1px solid var(--border-primary);
           position: relative;
           cursor: pointer;
-          transition: background-color 0.2s;
+          transition: background-color 0.2s, border-color 0.3s;
         }
 
         .time-slot-cell:hover {
-          background: var(--gray-50);
+          background: var(--bg-secondary);
         }
 
         .event-block {

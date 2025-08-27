@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import WeeklyCalendar from '@/components/WeeklyCalendar';
 import EventModal from '@/components/EventModal';
+import ThemeToggle from '@/components/ThemeToggle';
 import { CalendarEvent } from '@/types/event';
 
 const HomePage: React.FC = () => {
@@ -96,9 +97,12 @@ const HomePage: React.FC = () => {
           <h1 className="app-title">Calendar App</h1>
           <p className="app-subtitle">Manage your events and stay organized</p>
         </div>
-        <button className="btn btn-primary create-btn" onClick={handleCreateEvent}>
-          + Create Event
-        </button>
+        <div className="header-actions">
+          <ThemeToggle />
+          <button className="btn btn-primary create-btn" onClick={handleCreateEvent}>
+            + Create Event
+          </button>
+        </div>
       </header>
 
       <main className="main-content">
@@ -124,8 +128,9 @@ const HomePage: React.FC = () => {
       <style jsx>{`
         .app-container {
           min-height: 100vh;
-          background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+          background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
           padding: 2rem;
+          transition: background 0.3s;
         }
 
         .app-header {
@@ -134,10 +139,11 @@ const HomePage: React.FC = () => {
           align-items: center;
           margin-bottom: 2rem;
           padding: 2rem;
-          background: white;
+          background: var(--bg-primary);
           border-radius: 12px;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-          border: 1px solid var(--gray-200);
+          box-shadow: 0 4px 6px -1px var(--shadow-medium);
+          border: 1px solid var(--border-primary);
+          transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
 
         .header-content {
@@ -147,18 +153,26 @@ const HomePage: React.FC = () => {
         .app-title {
           font-size: 2.5rem;
           font-weight: 700;
-          color: var(--gray-900);
+          color: var(--text-primary);
           margin: 0;
           background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
+          transition: color 0.3s;
         }
 
         .app-subtitle {
           font-size: 1.125rem;
-          color: var(--gray-600);
+          color: var(--text-secondary);
           margin: 0.5rem 0 0 0;
+          transition: color 0.3s;
+        }
+
+        .header-actions {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
         }
 
         .create-btn {
@@ -191,6 +205,11 @@ const HomePage: React.FC = () => {
             flex-direction: column;
             gap: 1rem;
             text-align: center;
+          }
+
+          .header-actions {
+            flex-direction: column;
+            gap: 0.75rem;
           }
 
           .app-title {
