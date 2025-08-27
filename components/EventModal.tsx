@@ -205,121 +205,193 @@ const EventModal: React.FC<EventModalProps> = ({
           left: 0;
           right: 0;
           bottom: 0;
-          background: rgba(0, 0, 0, 0.5);
+          background: rgba(0, 0, 0, 0.6);
+          backdrop-filter: blur(8px);
           display: flex;
           align-items: center;
           justify-content: center;
           z-index: 1000;
           padding: 1rem;
+          animation: modalOverlayFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes modalOverlayFadeIn {
+          from {
+            opacity: 0;
+            backdrop-filter: blur(0px);
+          }
+          to {
+            opacity: 1;
+            backdrop-filter: blur(8px);
+          }
         }
 
         .modal-content {
           background: var(--bg-primary);
-          border-radius: 12px;
+          border-radius: 1.5rem;
           width: 100%;
-          max-width: 500px;
+          max-width: 540px;
           max-height: 90vh;
           overflow-y: auto;
-          box-shadow: 0 25px 50px -12px var(--shadow-medium);
+          box-shadow: var(--shadow-2xl);
           border: 1px solid var(--border-primary);
-          transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          position: relative;
+          animation: modalContentSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes modalContentSlideIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
         }
 
         .modal-header {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 1.5rem;
+          padding: 2rem;
           border-bottom: 1px solid var(--border-primary);
-          background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+          background: var(--green-gradient);
           color: white;
-          border-radius: 12px 12px 0 0;
+          border-radius: 1.5rem 1.5rem 0 0;
           transition: border-color 0.3s;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .modal-header::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+          pointer-events: none;
         }
 
         .modal-title {
-          font-size: 1.25rem;
-          font-weight: 600;
+          font-size: 1.5rem;
+          font-weight: 700;
           margin: 0;
+          letter-spacing: -0.025em;
+          position: relative;
+          z-index: 1;
         }
 
         .close-btn {
-          background: none;
-          border: none;
-          font-size: 2rem;
+          background: rgba(255, 255, 255, 0.15);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          font-size: 1.5rem;
           color: white;
           cursor: pointer;
           line-height: 1;
           padding: 0;
-          width: 32px;
-          height: 32px;
+          width: 40px;
+          height: 40px;
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: 4px;
-          transition: background-color 0.2s;
+          border-radius: 12px;
+          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+          backdrop-filter: blur(8px);
+          position: relative;
+          z-index: 1;
         }
 
         .close-btn:hover {
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, 0.25);
+          border-color: rgba(255, 255, 255, 0.4);
+          transform: scale(1.05);
+        }
+
+        .close-btn:active {
+          transform: scale(0.95);
         }
 
         .modal-form {
-          padding: 1.5rem;
+          padding: 2rem;
         }
 
         .form-group {
-          margin-bottom: 1.5rem;
+          margin-bottom: 2rem;
         }
 
         .form-row {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 1rem;
+          gap: 1.5rem;
         }
 
         .form-label {
           display: block;
-          font-size: 0.875rem;
-          font-weight: 500;
+          font-size: 0.9375rem;
+          font-weight: 600;
           color: var(--text-primary);
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.75rem;
           transition: color 0.3s;
+          letter-spacing: -0.01em;
         }
 
         .textarea {
           resize: vertical;
-          min-height: 80px;
+          min-height: 100px;
         }
 
         .modal-actions {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-top: 2rem;
-          padding-top: 1.5rem;
+          margin-top: 2.5rem;
+          padding-top: 2rem;
           border-top: 1px solid var(--border-primary);
           transition: border-color 0.3s;
         }
 
         .action-buttons {
           display: flex;
-          gap: 0.75rem;
+          gap: 1rem;
         }
 
         @media (max-width: 640px) {
+          .modal-content {
+            margin: 0.5rem;
+            max-height: 95vh;
+          }
+
+          .modal-header {
+            padding: 1.5rem;
+          }
+
+          .modal-form {
+            padding: 1.5rem;
+          }
+
           .form-row {
             grid-template-columns: 1fr;
+            gap: 1rem;
           }
           
           .action-buttons {
             flex-direction: column;
             width: 100%;
+            gap: 0.75rem;
           }
           
           .modal-actions {
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.25rem;
+            align-items: stretch;
+          }
+
+          .modal-title {
+            font-size: 1.25rem;
           }
         }
       `}</style>
